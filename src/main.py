@@ -13,8 +13,9 @@ if __name__ == '__main__':
     _list = [prod1, prod2, prod3, prod4, prod5]
     market = Category('Продуктовый', 'Маркетплэйс продуктовых товаров', _list)
     print(Category('x', 'y', _list).count_category)
-    assert market.count_category == 4
-    assert market.count_product == 5
+    print(Category('x', 'y', _list).count_product)
+    assert Category.count_category == 4
+    assert Category.count_product == 5
     assert prod1.name == 'Молоко'
     assert prod4.price == 500
     assert market.name == 'Продуктовый'
