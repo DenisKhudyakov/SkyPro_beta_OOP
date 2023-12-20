@@ -14,3 +14,8 @@ class Category:
             list(filter(lambda prod: prod.quantity_in_stock, self.__products))
         )
         Category.count_product = len(set(self.__products))
+
+    @property
+    def get_products(self):
+        for i_prod in self.__products:
+            yield f'Продукт, {i_prod.price} руб. Остаток: {i_prod.quantity_in_stock} шт.'
