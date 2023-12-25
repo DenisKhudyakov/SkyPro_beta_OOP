@@ -47,8 +47,7 @@ class Product:
             cls.init_product(name, description, price, quantity_in_stock)
         )
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         """Магический метод для красивого вывода класса"""
-        return (
-            f"Продукты {self.name} цена {self.price} остаток {self.quantity_in_stock}"
-        )
+        return f"Продукты {self.name} цена {self.price} остаток {self.quantity_in_stock}"
+
