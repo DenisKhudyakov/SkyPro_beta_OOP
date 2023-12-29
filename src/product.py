@@ -49,5 +49,12 @@ class Product:
 
     def __str__(self) -> str:
         """Магический метод для красивого вывода класса"""
-        return f"Продукты {self.name} цена {self.price} остаток {self.quantity_in_stock}"
+        return (
+            f"Продукты {self.name} цена {self.price} остаток {self.quantity_in_stock}"
+        )
 
+    def __add__(self, other):
+        """Метод получения суммарной стоимости продукта"""
+        total_price = self.price * self.quantity_in_stock
+        total_price += other.price * other.quantity_in_stock
+        return total_price

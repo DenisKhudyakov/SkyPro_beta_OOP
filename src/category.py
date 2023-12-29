@@ -18,7 +18,7 @@ class Category:
     @property
     def get_products(self):
         for i_prod in self.__products:
-            yield f'Продукт, {i_prod.price} руб. Остаток: {i_prod.quantity_in_stock} шт.'
+            yield f"Продукт, {i_prod.price} руб. Остаток: {i_prod.quantity_in_stock} шт."
 
     def __str__(self):
         return f"Наименование {self.name}, Описание {self.description}. Список товаров: {self.__products}"
