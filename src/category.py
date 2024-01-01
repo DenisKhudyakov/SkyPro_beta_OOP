@@ -1,4 +1,6 @@
 from collections import Counter
+
+
 class Category:
     count_category: int = 0
     count_product: int = 0
@@ -7,12 +9,16 @@ class Category:
         """конструктор класса, категория товаров, атрибуты: название, описание, перечень продуктов"""
         self.name = name
         self.description = description
-        self.products = products
-        Category.count_category = len(list(filter(lambda prod: prod.quantity_in_stock, self.products)))
-        Category.count_product = len(set(self.products))
+        self.__products = products
+        Category.count_category = len(
+            list(filter(lambda prod: prod.quantity_in_stock, self.__products))
+        )
+        Category.count_product = len(set(self.__products))
 
+    @property
+    def get_products(self):
+        for i_prod in self.__products:
+            yield f"Продукт, {i_prod.price} руб. Остаток: {i_prod.quantity_in_stock} шт."
 
-
-
-
-
+    def __str__(self):
+        return f"Наименование {self.name}, Описание {self.description}. Список товаров: {self.__products}"
