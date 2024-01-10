@@ -74,6 +74,12 @@ class Smartphone(Product):
             return self.price + other.price
         raise TypeError
 
+    @classmethod
+    def add_product(cls, *args) -> None:
+        """Задание №3 доработка функции добавления продуктов в каталог"""
+        if issubclass(cls, Product):
+            cls.product_list.append(cls(*args))
+
 class LawnGrass(Product):
     """Класс трава газонная, отдельно существующий продукт"""
     def __init__(self, name: str, description: str, price: float, quantity_in_stock: int, country: str, germination_period: str, color: str) -> None:
@@ -88,6 +94,12 @@ class LawnGrass(Product):
             return self.price + other.price
         raise TypeError
 
+    @classmethod
+    def add_product(cls, *args) -> None:
+        """Задание №3 доработка функции добавления продуктов в каталог"""
+        if issubclass(cls, Product):
+            cls.product_list.append(cls(*args))
+
 
 if __name__ == '__main__':
     prod1 = Product(name="Молоко", description="Молочные продукты", price=60, quantity_in_stock=10)
@@ -98,4 +110,5 @@ if __name__ == '__main__':
     print(type(prod2))
     print(isinstance(type(prod2), type(prod1)))
     print(prod2 + prod4)
-
+    prod2.add_product('Nokia2', 'Any smartphone', 15000, 10, 5000.00, 'zf-1000', 3000, 'red')
+    print(prod2.product_list)
