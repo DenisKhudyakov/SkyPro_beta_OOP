@@ -1,7 +1,12 @@
 from typing import Optional
+from abc import ABC, abstractmethod
 
+class ExampleProduct(ABC):
+    @abstractmethod
+    def add_product(self, *args):
+        pass
 
-class Product:
+class Product(ExampleProduct):
     product_list: list = []
 
     def __init__(
