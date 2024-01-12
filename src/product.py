@@ -1,22 +1,34 @@
 from typing import Optional
 from abc import ABC, abstractmethod
 
+
 class ExampleProduct(ABC):
     @abstractmethod
     def add_product(self, *args):
         pass
 
-class Product(ExampleProduct):
+
+class Mixin:
+    def __init__(
+        self, name: str, description: str, price: float, quantity_in_stock: int
+    ):
+        self.name = name
+        self.description = description
+        self.price = price
+        self.quantity_in_stock = quantity_in_stock
+
+    def __repr__(self, *args):
+        return f"создан объект со свойствами {self.name} {self.description} {self.price} {self.quantity_in_stock}"
+
+
+class Product(ExampleProduct, Mixin):
     product_list: list = []
 
     def __init__(
         self, name: str, description: str, price: float, quantity_in_stock: int
     ) -> None:
         """конструктор класса продукт, атрибуты название, описание, цена, количество вналичии"""
-        self.name = name
-        self.description = description
-        self.price = price
-        self.quantity_in_stock = quantity_in_stock
+        super().__init__(name, description, price, quantity_in_stock)
 
     @property
     def get_price(self) -> float:
@@ -64,9 +76,21 @@ class Product(ExampleProduct):
         total_price += other.price * other.quantity_in_stock
         return total_price
 
-class Smartphone(Product):
+
+class Smartphone(Product, Mixin):
     """Класс смартфоны, отдельно существующий продукт"""
-    def __init__(self, name: str, description: str, price: float, quantity_in_stock: int, efficiency: float, model: str, memory: int, color: str) -> None:
+
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity_in_stock: int,
+        efficiency: float,
+        model: str,
+        memory: int,
+        color: str,
+    ) -> None:
         """Расширение дочернего класса, дополнены параметры: производительность, модель, объем памяти, цвет"""
         super().__init__(name, description, price, quantity_in_stock)
         self.efficiency = efficiency
@@ -85,9 +109,20 @@ class Smartphone(Product):
         if issubclass(cls, Product):
             cls.product_list.append(cls(*args))
 
-class LawnGrass(Product):
+
+class LawnGrass(Product, Mixin):
     """Класс трава газонная, отдельно существующий продукт"""
-    def __init__(self, name: str, description: str, price: float, quantity_in_stock: int, country: str, germination_period: str, color: str) -> None:
+
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity_in_stock: int,
+        country: str,
+        germination_period: str,
+        color: str,
+    ) -> None:
         """Расширение дочернего класса, дополнены параметры: страна производитель, период прорастания, цвет"""
         super().__init__(name, description, price, quantity_in_stock)
         self.country = country
@@ -106,14 +141,31 @@ class LawnGrass(Product):
             cls.product_list.append(cls(*args))
 
 
-if __name__ == '__main__':
-    prod1 = Product(name="Молоко", description="Молочные продукты", price=60, quantity_in_stock=10)
-    prod2 = Smartphone('Nokia', 'Any smartphone', 10000, 10, 5000.00, 'zf-1000', 3000, 'red')
-    prod4 = Smartphone('Nokia2', 'Any smartphone', 15000, 10, 5000.00, 'zf-1000', 3000, 'red')
-    prod3 = LawnGrass('Овсянница', 'Широко распространенное растение', 100.50, 10000, 'Russia', '3 month', 'green')
+if __name__ == "__main__":
+    prod1 = Product(
+        name="Молоко", description="Молочные продукты", price=60, quantity_in_stock=10
+    )
+    prod2 = Smartphone(
+        "Nokia", "Any smartphone", 10000, 10, 5000.00, "zf-1000", 3000, "red"
+    )
+    prod4 = Smartphone(
+        "Nokia2", "Any smartphone", 15000, 10, 5000.00, "zf-1000", 3000, "red"
+    )
+    prod3 = LawnGrass(
+        "Овсянница",
+        "Широко распространенное растение",
+        100.50,
+        10000,
+        "Russia",
+        "3 month",
+        "green",
+    )
+    print([prod1, prod2, prod3])
     print(type(prod1))
     print(type(prod2))
     print(isinstance(type(prod2), type(prod1)))
     print(prod2 + prod4)
-    prod2.add_product('Nokia2', 'Any smartphone', 15000, 10, 5000.00, 'zf-1000', 3000, 'red')
+    prod2.add_product(
+        "Nokia2", "Any smartphone", 15000, 10, 5000.00, "zf-1000", 3000, "red"
+    )
     print(prod2.product_list)

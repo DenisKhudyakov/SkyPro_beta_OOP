@@ -69,4 +69,4 @@ if __name__ == "__main__":
 
     print(next(initial_class_generator(read_json(PATH_FILE))))
 
-    print(prod4 + prod5) # сложение объектов работает
+    print(prod4 + prod5)  # сложение объектов работает
