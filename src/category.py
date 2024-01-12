@@ -22,3 +22,5 @@ class Category:
 
     def __str__(self):
         return f"Наименование {self.name}, Описание {self.description}. Список товаров: {self.__products}"
+
+
