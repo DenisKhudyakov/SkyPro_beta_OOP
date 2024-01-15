@@ -15,7 +15,10 @@ class Mixin:
         self.name = name
         self.description = description
         self.price = price
-        self.quantity_in_stock = quantity_in_stock
+        if quantity_in_stock:
+            self.quantity_in_stock = quantity_in_stock
+        else:
+            raise ValueError('Не может быть добавлен товар с нулевым количеством')
 
     def __repr__(self, *args):
         return f"создан объект со свойствами {self.name} {self.description} {self.price} {self.quantity_in_stock}"

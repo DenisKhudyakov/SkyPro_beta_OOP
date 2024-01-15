@@ -22,3 +22,10 @@ class Category:
 
     def __str__(self):
         return f"Наименование {self.name}, Описание {self.description}. Список товаров: {self.__products}"
+
+    def middle_price(self):
+        """Класс, который считает среднюю цену товаров в списке"""
+        try:
+            return sum(self.__products) / len(self.__products)
+        except ZeroDivisionError('Список товаров пуст'):
+            return 0
